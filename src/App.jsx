@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="App">
       <div style={{ textAlign: 'center', backgroundColor: 'skyblue', padding: '20px' }}>
-        <h1 style={{ margin: 0, color: 'white' }}>계절 테마 여행</h1>
+        <h1 style={{ margin: 0, color: 'white' }}>계절 테마 여행111111</h1>
       </div>
 
       <div style={{ backgroundColor: 'lightblue', padding: '10px', textAlign: 'center' }}>
