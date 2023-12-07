@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from 'axios'; //액시오스
 
 const dataContainerStyle = {
   maxWidth: '800px',
