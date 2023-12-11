@@ -44,6 +44,7 @@ const dataItemStyle = {
   padding: '10px',
   margin: '10px 0',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  backgroundColor: 'rgba(255, 255, 255, 0.6)'
 };
 
 const loadingStyle = {
@@ -67,7 +68,7 @@ const Menu = ({ category, options, selectedOption, onSelect, onHover, hoveredCat
         ...buttonStyle,
         backgroundColor: selectedOption ? '#2980b9' : 'white',
         color: selectedOption ? 'white' : '#3498db',
-        borderRadius: '4px',
+        borderRadius: '15px',
       }}
     >
       {category}
@@ -76,12 +77,11 @@ const Menu = ({ category, options, selectedOption, onSelect, onHover, hoveredCat
       <div
         style={{
           position: 'absolute',
-          top: '100%',
-          left: '0',
-          width: '100%',
+          top: '0',  // Updated from '100%' to '0'
+          left: '100%',  // Updated from '0' to '100%'
+          display: 'flex',  // Added to make op
           backgroundColor: '#3498db',
-          borderRadius: '0 0 4px 4px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          borderRadius: '15px 15px 15px 15px',
         }}
       >
         {options.map((option, index) => (
@@ -91,7 +91,7 @@ const Menu = ({ category, options, selectedOption, onSelect, onHover, hoveredCat
             style={{
               ...buttonStyle,
               width: '100%',
-              borderRadius: '0',
+              borderRadius: '15px 15px 15px 15px',
               borderTop: '1px solid #2980b9',
             }}
           >
@@ -110,6 +110,7 @@ const App = () => {
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -154,6 +155,7 @@ const App = () => {
     if (type === 'season') setSelectedSeason(condition);
     else if (type === 'region') setSelectedRegion(condition);
     else if (type === 'month') setSelectedMonth(condition);
+    setSelectedCategory({ type, condition });
   };
 
   const handleCategoryHover = category => {
@@ -164,7 +166,7 @@ const App = () => {
     <div>
       <div style={blurredBackgroundStyle}></div>
       <div className="App" style={dataContainerStyle}>
-        <div style={{ textAlign: 'center', backgroundColor: 'skyblue', padding: '20px' }}>
+        <div style={{ textAlign: 'center', backgroundColor: 'skyblue', padding: '20px', borderRadius: '0 0 15px 15px' }}>
           <h1 style={{ margin: 0, color: 'white' }}>계절 테마 여행</h1>
         </div>
 
@@ -176,6 +178,7 @@ const App = () => {
           onHover={handleCategoryHover}
           hoveredCategory={hoveredCategory}
         />
+        <p></p>
 
         <Menu
           category="지역"
@@ -185,6 +188,7 @@ const App = () => {
           onHover={handleCategoryHover}
           hoveredCategory={hoveredCategory}
         />
+        <p></p>
 
         <Menu
           category="월별"
@@ -194,12 +198,14 @@ const App = () => {
           onHover={handleCategoryHover}
           hoveredCategory={hoveredCategory}
         />
+        <p></p>
 
         {loading ? (
           <p style={loadingStyle}>데이터 불러오는 중...</p>
         ) : (
           <div>
-            <h2 style={{ textAlign: 'center', fontSize: '24px', margin: '20px 0' }}>데이터:</h2>
+            <h2 style={{ textAlign: 'center', fontSize: '24px', margin: '15px 15px' }}>
+            {selectedCategory && `${selectedCategory.type} : ${selectedCategory.condition}`}</h2>
             {data.map((item) => (
               <div key={item.순번} style={dataItemStyle}>
                 <p>월: {item.월}</p>
