@@ -66,22 +66,22 @@ const Menu = ({ category, options, selectedOption, onSelect, onHover, hoveredCat
       onClick={() => onSelect(null)}
       style={{
         ...buttonStyle,
-        backgroundColor: selectedOption ? '#2980b9' : 'white',
-        color: selectedOption ? 'white' : '#3498db',
-        borderRadius: '15px',
+        backgroundColor: selectedOption ? 'skyblue' : 'white',
+        color: selectedOption ? 'white' : 'skyblue',
+        borderRadius: '10px',
       }}
     >
       {category}
     </button>
+
+
     {category === hoveredCategory && (
       <div
         style={{
           position: 'absolute',
-          top: '0',  // Updated from '100%' to '0'
-          left: '100%',  // Updated from '0' to '100%'
-          display: 'flex',  // Added to make op
-          backgroundColor: '#3498db',
-          borderRadius: '15px 15px 15px 15px',
+          top: '0%',
+          left: '100%',
+          display: 'flex',
         }}
       >
         {options.map((option, index) => (
@@ -91,7 +91,7 @@ const Menu = ({ category, options, selectedOption, onSelect, onHover, hoveredCat
             style={{
               ...buttonStyle,
               width: '100%',
-              borderRadius: '15px 15px 15px 15px',
+              borderRadius: '10px 10px 10px 10px',
               borderTop: '1px solid #2980b9',
             }}
           >
@@ -103,25 +103,25 @@ const Menu = ({ category, options, selectedOption, onSelect, onHover, hoveredCat
   </div>
 );
 
-const App = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [hoveredCategory, setHoveredCategory] = useState(null);
-  const [selectedSeason, setSelectedSeason] = useState(null);
-  const [selectedRegion, setSelectedRegion] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+const App = () => { // 상태관리 변수 정의
+  const [data, setData] = useState([]); // array
+  const [loading, setLoading] = useState(true); // boolean
+  const [hoveredCategory, setHoveredCategory] = useState(null); // string or null
+  const [selectedSeason, setSelectedSeason] = useState(null); // string or null
+  const [selectedRegion, setSelectedRegion] = useState(null); // string or null
+  const [selectedMonth, setSelectedMonth] = useState(null); // string or null
+  const [selectedCategory, setSelectedCategory] = useState(null); // string or null
 
   useEffect(() => {
     fetchData();
   }, [selectedSeason, selectedRegion, selectedMonth]);
 
-  const fetchData = async () => {
+  const fetchData = noda() => {
     try {
       const response = await axios.get(
         "https://api.odcloud.kr/api/15048444/v1/uddi:0ca96f4a-73ff-488c-92f1-ed6463171392?page=1&perPage=100&serviceKey=Ur6kk3Un1TMf2yb8jCLqFsV0kY1lqiQhFvWVmB9FVvte6EZXEDzpA5%2BvOi9xEHftbQ0%2BSRv31lQPTlweUq0fsg%3D%3D"
       );
-
+      
       let filteredData = response.data.data;
 
       if (selectedSeason) {
